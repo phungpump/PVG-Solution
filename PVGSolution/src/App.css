@@ -1,0 +1,42 @@
+:root {
+  --tab-padding-bottom: 14px;
+  --underline-height: 4px;
+  --underline-offset: -10px; /* green underline sits below tab bottom */
+}
+
+/* tab trigger */
+.tabs-trigger {
+  padding-bottom: var(--tab-padding-bottom);
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+
+/* underline (green) */
+.tabs-trigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: var(--underline-offset); /* e.g. -10px, so green is below the tab */
+  width: 0;
+  height: var(--underline-height);
+  border-radius: 9999px;
+  background: #065f46;
+  transition: width 160ms ease, opacity 160ms ease;
+  opacity: 0;
+  z-index: 10; /* lower than gray baseline which we set to z-index:30 */
+}
+
+.tabs-trigger:hover::after,
+.tabs-trigger[data-state="active"]::after {
+  width: 100%;
+  opacity: 1;
+}
+
+/* active text color */
+.tabs-trigger[data-state="active"] {
+  color: #065f46;
+  font-weight: 600;
+}
