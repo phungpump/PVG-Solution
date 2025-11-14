@@ -20,7 +20,7 @@ const RequestCustomerDetail = React.lazy(
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/PVG-Solution/",
     element: <App />,
     children: [
       { index: true, element: <HomePage /> },
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
+    path: "/PVG-Solution/admin",
     element: <Admin />,
     children: [
       { index: true, element: <HomePage /> },
