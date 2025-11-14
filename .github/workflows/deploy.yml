@@ -1,13 +1,18 @@
-name: Deploy Vite site to GitHub Pages
+name: Deploy Vite site to GitHub Pages (pnpm)
 
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 env:
   PROJECT_DIR: "./PVGSolution"
@@ -15,10 +20,13 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
+
+      # Configure Pages for this repository/run (important)
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -32,16 +40,16 @@ jobs:
 
       - name: Show repo layout (debug)
         run: |
-          echo "Root:"
+          echo "PWD: $(pwd)"
           ls -la
           echo "Project dir:"
-          ls -la ${{ env.PROJECT_DIR }}
+          ls -la ${{ env.PROJECT_DIR }} || true
 
-      - name: Install dependencies (pnpm install)
+      - name: Install deps (pnpm)
         run: pnpm install --frozen-lockfile
         working-directory: ${{ env.PROJECT_DIR }}
 
-      - name: Build Vite site
+      - name: Build (pnpm)
         run: pnpm build
         working-directory: ${{ env.PROJECT_DIR }}
 
@@ -55,8 +63,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
         id: deployment
+        uses: actions/deploy-pages@v4
