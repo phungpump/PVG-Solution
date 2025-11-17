@@ -58,7 +58,7 @@ export default function RequestCustomerPage(): JSX.Element {
         ],
       };
 
-      const res = await fetch("/api/request_customer/Save", {
+      const res = await fetch("/api/request_customer/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
