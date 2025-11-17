@@ -49,15 +49,12 @@ export default function RequestCustomerPage(): JSX.Element {
     try {
       // Build payload as array of key/value objects with phone included per example
       const payload = {
-        data: [
-          { phone: form.phone, key: "fullname", value: form.fullname },
-          { phone: form.phone, key: "phone", value: form.phone },
-          { phone: form.phone, key: "address", value: form.address },
-          {
-            phone: form.phone,
-            key: "redBookAddress",
-            value: form.redBookAddress,
-          },
+        Phone: form.phone,
+        Data: [
+          { key: "fullname", value: form.fullname },
+          { key: "phone", value: form.phone },
+          { key: "address", value: form.address },
+          { key: "redBookAddress", value: form.redBookAddress},
         ],
       };
 
