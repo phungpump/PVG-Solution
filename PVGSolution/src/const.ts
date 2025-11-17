@@ -1,0 +1,1 @@
+export const hostapi = "https://localhost:7138";

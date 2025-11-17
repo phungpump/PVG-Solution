@@ -1,3 +1,4 @@
+import { hostapi } from "@/const";
 import React, { useState, type JSX } from "react";
 
 type FormState = {
@@ -59,7 +60,7 @@ export default function RequestCustomerPage(): JSX.Element {
         ],
       };
 
-      const res = await fetch("https://localhost:7138/api/request_customer/save", {
+      const res = await fetch(`${hostapi}/api/request_customer/save`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
