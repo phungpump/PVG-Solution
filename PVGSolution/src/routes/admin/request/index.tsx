@@ -1,6 +1,7 @@
 import { useEffect, useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import type { RequestItem } from "../dashboard";
+import { hostapi } from "@/const";
 
 export default function RequestsList(): JSX.Element {
   const [items, setItems] = useState<RequestItem[]>([]);
@@ -15,7 +16,7 @@ export default function RequestsList(): JSX.Element {
       setError(null);
       try {
         // Example: call your API to fetch requests. Change URL to your backend.
-        const res = await fetch("/api/request_customer/list");
+        const res = await fetch(`${hostapi}/api/request_customer/list`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         if (!cancelled) {

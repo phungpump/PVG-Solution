@@ -1,6 +1,7 @@
 import { useEffect, useState, type JSX } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { RequestItem } from "../dashboard";
+import { hostapi } from "@/const";
 
 // --- Request detail page ---
 export default function RequestDetail(): JSX.Element {
@@ -16,7 +17,7 @@ export default function RequestDetail(): JSX.Element {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/api/request_customer/${id}`);
+        const res = await fetch(`${hostapi}/api/request_customer/${id}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         if (!cancelled) setItem(data);
