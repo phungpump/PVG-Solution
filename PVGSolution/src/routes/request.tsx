@@ -47,6 +47,7 @@ export default function RequestCustomerPage(): JSX.Element {
 
     setLoading(true);
     try {
+      debugger
       // Build payload as array of key/value objects with phone included per example
       const payload = {
         Phone: form.phone,
@@ -58,7 +59,7 @@ export default function RequestCustomerPage(): JSX.Element {
         ],
       };
 
-      const res = await fetch("/api/request_customer/save", {
+      const res = await fetch("https://localhost:7138/api/request_customer/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
